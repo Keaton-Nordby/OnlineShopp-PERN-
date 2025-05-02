@@ -39,6 +39,12 @@ app.use(async (req,resizeBy,next) => {
             return
         }
 
+        // check for spoofed bots
+        if (decision.results.some((result) => result.reason.isBot() && result.reason.isSpoofed())) {
+            res.status(403).json({ error: "Spoofed bot detected" });
+            return;
+        }
+
         next()
     } catch (error) {
         
