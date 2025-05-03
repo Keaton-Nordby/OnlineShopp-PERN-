@@ -47,9 +47,10 @@ app.use(async (req,resizeBy,next) => {
 
         next()
     } catch (error) {
-        
+        console.log("Arcjet error", error);
+        next(error)
     }
-})
+});
 
 app.use("/api/products", productRoutes);
 
